@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
+    <script type="text/javascript" src="http://hexregex.com/res/config.js"></script>
+    <link href="http://hexregex.com/res/style.css" rel="stylesheet">
+</head>
+
+<!--
+<script type="text/javascript">
+    var map = new ymaps.Map("map", {
+            center: [56.30, 43.945], 
+            zoom: 8
+        });
+</script>
+-->
+
+<script type="text/javascript">
+    ymaps.ready(init);
+    var myMap;
+    var pandas;
+
+    function init() {
+        myMap = new ymaps.Map("map", {
+            center: [56.3, 44.02],
+            zoom: 12
+        });
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                console.log(xhttp.responseText);
+                var pandas = JSON.parse(xhttp.responseText);
+                pandas.forEach(function(entry){
+                console.log('Panda ' + entry.name +
+                            ' at (' + entry.lon + ',' + entry.lat + ')' );
+                    myMap.geoObjects.add(new ymaps.Placemark(
+                        [entry.lon, entry.lat],
+                        {hintContent: entry.name,
+                            balloonContent: entry.comment}));
+                });
+            }
+        };
+
+        xhttp.open( "GET", config.url, true );
+        xhttp.send();
+    }
+
+</script>
+
+<body>
+    <div id="page">
+        <div id="header" class="site-header">
+            <div class="wrap">
+ 
+              <div id="branding" role="banner"  align="center"  >
+                    <p class="site-title"><a href="http://hexregex.com/hugs">Main page</a></p>
+                    <p class="site-description">Hi everybody here</p>
+                </div><!--#branding-->
+ 
+            </div><!--.wrap-->
+        </div><!--#header-->
+ 
+        <div id="main">
+            <div class="wrap">
+ 
+                <div id="primary">
+                    <div id="content" role="main">
+		      <div id="map" style="width: 90%; height: 600px" align="center"></div>
+                    </div><!-- #content -->
+                </div><!-- #primary -->
+ 
+            </div><!--.wrap-->
+        </div><!--#main-->
+ 
+        <div id="footer" class="site-footer">
+            <div class="wrap">
+ 
+                <p class="site-credits">© Cadovvl (pavelandreevith@google.com) 2016</p>
+ 
+            </div><!--.wrap-->
+        </div><!--#footer-->
+ 
+    </div><!--#page-->
+</body>
+</html>
