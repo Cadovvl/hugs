@@ -4,6 +4,9 @@ import tornado.ioloop
 import tornado.web
 import json
 
+home_directory="."
+#home_directory="/home/pasukhov/site"
+
 
 def parse_panda(str):
     p = str.split(':')
@@ -12,14 +15,14 @@ def parse_panda(str):
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        f = open("./names.dat", "r")
+        f = open(home_directory + "/names.dat", "r")
         self.add_header("Access-Control-Allow-Origin", "*")
         self.write(json.dumps([parse_panda(i) for i in f],
-                              separators=(',', ':')))
+                              separators=(',', ':'), encoding='utf-8'))
     def post(self):
         print "Body"
         print self.request.body
-        obj = json.loads(self.request.body)
+        obj = json.loads(self.request.body, encoding='utf-8')
         f = open("./names.dat", "a")
         f.write("\n"
                 + obj["name"] + ":"
