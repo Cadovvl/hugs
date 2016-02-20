@@ -21,7 +21,7 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         f = open(home_directory + "/names.dat", "r")
         self.add_header("Access-Control-Allow-Origin", "*")
-        self.write(json.dumps([parse_panda(i) for i in f],
+        self.write(json.dumps([parse_panda(i) for i in f if len(i) > 3],
                               separators=(',', ':'), encoding='utf-8'))
     def post(self):
         print "Body"
