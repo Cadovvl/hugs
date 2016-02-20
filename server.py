@@ -4,6 +4,10 @@ import tornado.ioloop
 import tornado.web
 import json
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 home_directory="."
 #home_directory="/home/pasukhov/site"
 
