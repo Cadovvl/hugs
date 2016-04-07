@@ -12,9 +12,8 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-home_directory = "."
-# home_directory="/home/pasukhov/site"
-
+#home_directory="."
+home_directory="/home/pasukhov/site"
 
 def parse_panda(str):
     p = str.split(':')

@@ -5,8 +5,8 @@ rm -f ./res/config.json
 
 export LOCATE=$(cat ./res/location)
 # todo: make a soft link
-ln ./res/config_${LOCATE}.js ./res/config.js
-ln ./res/config_${LOCATE}.json ./res/config.json
+ln  ./res/config_${LOCATE}.js ./res/config.js
+ln  ./res/config_${LOCATE}.json ./res/config.json
 
 chown -R pasukhov:pasukhov ${PWD}/res/config.js
 chown -R pasukhov:pasukhov ${PWD}/res/config.json
