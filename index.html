@@ -1,91 +1,210 @@
-<!DOCTYPE html>
-<html lang="en">
-
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <title>Cat hugs</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <!--
+    Template 2050 Blue Spark
+    http://www.tooplate.com/view/2050-blue-spark
+    -->
+    <link href="css/tooplate_style.css" rel="stylesheet" type="text/css"/>
 
-    <link href="http://hexregex.com/res/style.css" rel="stylesheet">
+    <!-- Arquivos utilizados pelo jQuery lightBox plugin -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.lightbox-0.5.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery.lightbox-0.5.css" media="screen"/>
+    <!-- / fim dos arquivos utilizados pelo jQuery lightBox plugin -->
+    <script type='text/javascript' src='js/jquery.min.js'></script>
+    <script type='text/javascript' src='js/jquery.scrollTo-min.js'></script>
+    <script type='text/javascript' src='js/jquery.localscroll-min.js'></script>
+    <script type="text/javascript" src="js/jquery.lightbox-0.5.js"></script>
+    <!-- Ativando o jQuery lightBox plugin -->
+    <script type="text/javascript">
+        $(function () {
+            $.localScroll();
+            $('#map a').lightBox();
+        });
+    </script>
+
+    <script type="text/javascript">
+        ymaps.ready(init);
+        var myMap;
+        var pandas;
+
+        function init() {
+            myMap = new ymaps.Map("map", {
+                center: [56.3, 44.02],
+                zoom: 12
+            });
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    console.log(xhttp.responseText);
+                    var pandas = JSON.parse(xhttp.responseText);
+                    pandas.forEach(function (entry) {
+                        console.log('Panda ' + entry.name +
+                                ' at (' + entry.lon + ',' + entry.lat + ')');
+                        myMap.geoObjects.add(new ymaps.Placemark(
+                                [entry.lon, entry.lat],
+                                {
+                                    hintContent: entry.name,
+                                    balloonContent: entry.comment
+                                }));
+                    });
+                }
+            };
+
+            xhttp.open("GET", 'http://localhost:8733/hugs/panda', true);
+            xhttp.send();
+        }
+
+    </script>
+
 </head>
-
-<!--
-<script type="text/javascript">
-    var map = new ymaps.Map("map", {
-            center: [56.30, 43.945], 
-            zoom: 8
-        });
-</script>
--->
-
-<script type="text/javascript">
-    ymaps.ready(init);
-    var myMap;
-    var pandas;
-
-    function init() {
-        myMap = new ymaps.Map("map", {
-            center: [56.3, 44.02],
-            zoom: 12
-        });
-
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                console.log(xhttp.responseText);
-                var pandas = JSON.parse(xhttp.responseText);
-                pandas.forEach(function(entry){
-                console.log('Panda ' + entry.name +
-                            ' at (' + entry.lon + ',' + entry.lat + ')' );
-                    myMap.geoObjects.add(new ymaps.Placemark(
-                        [entry.lon, entry.lat],
-                        {hintContent: entry.name,
-                            balloonContent: entry.comment}));
-                });
-            }
-        };
-
-        xhttp.open( "GET", 'http://localhost:8733/hugs/panda', true );
-        xhttp.send();
-    }
-
-</script>
-
 <body>
-    <div id="page">
-        <div id="header" class="site-header">
-            <div class="wrap">
- 
-              <div id="branding" role="banner"  align="center"  >
-                    <p class="site-title"><a href="http://hexregex.com/hugs">Main page</a></p>
-                    <p class="site-description">Hi everybody here</p>
-                </div><!--#branding-->
- 
-            </div><!--.wrap-->
-        </div><!--#header-->
- 
-        <div id="main">
-            <div class="wrap">
- 
-                <div id="primary">
-                    <div id="content" role="main">
-		      <div id="map" style="width: 90%; height: 600px" align="center"></div>
-                    </div><!-- #content -->
-                </div><!-- #primary -->
- 
-            </div><!--.wrap-->
-        </div><!--#main-->
- 
-        <div id="footer" class="site-footer">
-            <div class="wrap">
- 
-                <p class="site-credits">© Cadovvl (pavelandreevith@google.com) 2016</p>
- 
-            </div><!--.wrap-->
-        </div><!--#footer-->
- 
-    </div><!--#page-->
+
+<span id="top"></span>
+<div id="tooplate_body_wrapper">
+    <div id="tooplate_wrapper">
+        <div id="tooplate_header">
+            <div class="image_wrapper image_fl">
+                <img src="images/site_main_image.jpg" alt="Image 02" width="150px" height="100px" />
+                <span></span>
+            </div>
+
+            <div id="tooplate_menu">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#adder">New event</a></li>
+                    <li><a href="#blog">Nothing yet</a></li>
+                    <li><a href="#portfolio">Add smth...</a></li>
+                    <li class="last"><a href="#contactus">Contact</a></li>
+                </ul>
+            </div> <!-- end of tooplate_menu -->
+        </div> <!-- end of header -->
+
+        <div id="tooplate_main">
+
+            <div id="home" class="content_top"></div>
+            <div class="content_box">
+                <div class="content_title content_ct"><h2>Welcome to Hug Map</h2></div>
+                <div class="content">
+
+                    <div id="main">
+                        <div class="wrap">
+
+                            <div id="primary">
+                                <div id="content" role="main">
+                                    <div id="map" style="width: 100%; height: 600px" align="center"></div>
+                                </div><!-- #content -->
+                            </div><!-- #primary -->
+
+                        </div><!--.wrap-->
+                    </div><!--#main-->
+
+                    <div id="footer" class="site-footer">
+                        <div class="wrap">
+
+                            <p class="site-credits"></p>
+
+                        </div><!--.wrap-->
+                    </div><!--#footer-->
+
+
+                    <div class="cleaner"></div>
+                </div>
+
+                <div class="content_bottom content_cb"><a href="#top" class="gototop">Go To Top</a></div>
+            </div>
+
+            <div id="adder" class="content_top"></div>
+            <div class="content_box">
+                <div class="content_title content_ct"><h2>New event can be added here</h2></div>
+                <div class="content">
+
+                    <p>Добавляйте сюда свои и просто интересные движухи, чтобы люди могли узнать о них!</p>
+
+                    <div class="cleaner h30"></div>
+                    <div class="col_w340 float_l">
+                        <h4>Add new event</h4>
+                        <div id="contact_form">
+                            <form method="post" name="contact" action="#">
+
+                                <label for="author">Name:</label> <input type="text" id="author" name="author" class="required input_field" />
+                                <div class="cleaner h10"></div>
+
+                                <label for="lon">lon:</label> <input type="text" class="input_field" name="lon" id="lon" />
+                                <div class="cleaner h10"></div>
+
+                                <label for="lat">lat:</label> <input type="text" class="input_field" name="lat" id="lat"/>
+                                <div class="cleaner h10"></div>
+
+                                <label for="message">Message:</label> <textarea id="message" name="text" rows="0" cols="0" class="required"></textarea>
+                                <div class="cleaner h10"></div>
+
+                                <input id="submit" value="Submit" type="button" onclick="send_hug()" class="submit_btn float_l"/>
+                                <input id="reset" value="Reset" type="button" onclick="clear_hug()" class="submit_btn float_r"/>
+                            </form>
+                            <div class="cleaner h30"></div>
+                            <span class="addition_result"></span>
+                        </div>
+                    </div>
+
+                    <div class="cleaner"></div>
+                </div>
+
+                <div class="content_bottom content_cbf"><a href="#top" class="gototop">Go To Top</a></div>
+            </div>
+
+            <div id="blog" class="content_top"></div>
+
+            <div id="tooplate_footer">
+
+                © Cadovvl (pavelandreevith@google.com) 2016 | Design: <a href="http://www.tooplate.com">tooplate</a>
+                <div class="cleaner"></div>
+            </div>
+
+        </div> <!-- end of warpper -->
+    </div> <!-- end of body wrapper -->
+</div>
 </body>
+
+
+
+<script type="text/javascript">
+    function send_hug() {
+        var resp = $.post('http://localhost:8733/hugs/panda', JSON.stringify(
+                {
+                    "name": document.getElementById("author").value,
+                    "lon": document.getElementById("lon").value,
+                    "lat": document.getElementById("lat").value,
+                    "comment": document.getElementById("message").value}),
+                function(data){
+                    if (data.length > 0) {
+                        $(".addition_result").empty();
+                        $(".addition_result").append('<b>Created hug with id:</b><br>' + data);
+                        clear_hug();
+                        return data;
+                    }
+                });
+    }
+</script>
+
+<script type="text/javascript">
+    function clear_hug() {
+        console.log("Clearing hug");
+        document.getElementById("author").value = "";
+        document.getElementById("lon").value = "";
+        document.getElementById("lat").value = "";
+        document.getElementById("message").value = "";
+    }
+</script>
+
 </html>
