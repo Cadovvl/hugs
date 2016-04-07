@@ -8,7 +8,6 @@
 
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 
-    <script type="text/javascript" src="http://hexregex.com/res/config.js"></script>
     <link href="http://hexregex.com/res/style.css" rel="stylesheet">
 </head>
 
@@ -48,7 +47,7 @@
             }
         };
 
-        xhttp.open( "GET", config.url, true );
+        xhttp.open( "GET", 'http://localhost:8733/hugs/panda', true );
         xhttp.send();
     }
 
