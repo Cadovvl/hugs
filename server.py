@@ -37,7 +37,9 @@ class DatabaseHandler(tornado.web.RequestHandler):
         self.write(json.dumps(jhugs, separators=(',', ':'), encoding='utf-8'))
 
     def post(self):
+        self.add_header("Access-Control-Allow-Origin", "*")
         id = uuid.uuid1()
+        print >> sys.stderr, self.request.body
         obj = json.loads(self.request.body, encoding='utf-8')
         session = self.cluster.connect('hugs')
         hugs = session.execute(
