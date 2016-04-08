@@ -43,6 +43,14 @@
                 zoom: 12
             });
 
+            myMap.events.add('click', function (e) {
+                coord = e.get('coords');
+                document.getElementById("lon").value = coord[0];
+                document.getElementById("lat").value = coord[1];
+            });
+
+            var cursor = myMap.cursors.push('arrow');
+
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
